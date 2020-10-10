@@ -1,11 +1,14 @@
+from typing import Sequence, MutableSequence, ByteString, Any, Optional
+
 def has_common_prefix(label: ByteString, other_label: ByteString) -> bool:
     """ Whether label and other_label have a prefix in common. """
-    assert label and other_label
+    if not label or not other_label: return False
     return True if label[0] == other_label[0] else False
 
 def common_prefix(label: ByteString, other_label: ByteString) -> ByteString:
     """ Get the common prefix of label and other_label. """
     buffer = bytearray()
+    if not label or not other_label: return buffer
     for (a,b) in zip(label, other_label):
         if a == b: buffer.append(a)
         else: break
@@ -13,6 +16,8 @@ def common_prefix(label: ByteString, other_label: ByteString) -> ByteString:
 
 def is_prefix_of(prefix: ByteString, label: ByteString) -> bool:
     """ Whether label starts with prefix """
+    if not prefix or not label: return False
+
     if len(prefix) > len(label):
         return False
     for (a,b) in zip(prefix, label):

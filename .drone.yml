@@ -6,8 +6,10 @@ steps:
 - name: validate
   image: python:3
   commands:
-    - pip install mypy
+    - pip install mypy pytest
     - mypy bytetrie/bytetrie.py
+    - mypy bytetrie/util.py
+    - python -m pytest
 
 - name: publish
   image: python:3
