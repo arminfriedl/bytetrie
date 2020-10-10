@@ -7,8 +7,7 @@ steps:
   image: python:3
   commands:
     - pip install mypy pytest
-    - mypy bytetrie/bytetrie.py
-    - mypy bytetrie/util.py
+    - mypy bytetrie/*.py
     - python -m pytest
 
 - name: publish
