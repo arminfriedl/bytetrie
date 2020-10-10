@@ -6,7 +6,7 @@ import logging
 log = logging.getLogger(__name__)
 
 class ByteTrie:
-    def __init__(self, multi_value=False):
+    def __init__(self, multi_value:bool=False):
         self.root = Root([])
         self.multi_value = multi_value
 
@@ -63,9 +63,9 @@ class ByteTrie:
         ancestor.put_child(node)
         return terminal
 
-    def find(self, prefix):
+    def find(self, prefix: ByteString) -> Sequence[Terminal]:
         node = self._find(self.root, prefix)
-        return self._get_terminals(node, prefix)
+        return self._get_terminals(node)
 
     def _find(self, node, prefix, collector=""):
         cutoff = node.cut_from(prefix)
@@ -84,15 +84,14 @@ class ByteTrie:
             log.debug(f"Found node {child} in {node} for {cutoff}. Traversing down.")
             return self._find(child, cutoff)
 
-    def _get_terminals(self, node, label_builder):
+    def _get_terminals(self, node):
         if not node: return []
 
         collector = []
         if isinstance(node, Terminal):
-            collector.append((node, label_builder))
+            collector.append((node))
         for child in node.children:
-            l = child.extend(label_builder)
-            collector.extend(self._get_terminals(child, l))
+            collector.extend(self._get_terminals(child))
         return collector
 
     def to_dot(self) -> str:
@@ -274,6 +273,17 @@ class Terminal(Child):
             t.content.extend(child.content) # add back original content
             return t
         return cls(child.label, content, child.parent, child.children, multi_value)
+
+    def key(self) -> ByteString:
+        l = bytes(self.label)
+        parent = self.parent
+        while isinstance(parent, Child):
+            l = bytes(parent.label) + l
+            parent = parent.parent
+        return l
+
+    def value(self) -> Any:
+        return self.content
 
     def to_dot(self) -> str:
         s = super().to_dot()

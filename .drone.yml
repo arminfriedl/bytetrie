@@ -1,0 +1,22 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: validate
+  image: python:3
+  commands:
+    - pip install mypy
+    - mypy bytetrie/bytetrie.py
+
+- name: publish
+  image: python:3
+  environment:
+    TWINE_USERNAME: __token__
+    TWINE_PASSWORD:
+      from_secret: pypi_test_token
+  commands:
+    - pip install twine setuptools wheel
+    - python setup.py sdist bdist_wheel
+    - twine check dist/*
+    - twine upload --repository testpypi dist/*

@@ -1,11 +1,12 @@
 import setuptools
 
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-setup(
+setuptools.setup(
     name="bytetrie",
-    version="0.0.1",
+    version="0.0.2",
     url="https://git.friedl.net/incubator/bytetrie",
     license="MIT",
     author="Armin Friedl",
