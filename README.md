@@ -1,5 +1,9 @@
+[![Build Status](https://drone.friedl.net/api/badges/incubator/bytetrie/status.svg)](https://drone.friedl.net/incubator/bytetrie)
+
 # Bytetrie
 A fast, dependency-free, self-compressing trie with radix 256 in pure python.
+
+![](trie.png)
 
 Bytetrie allows fast prefix search in a large corpus of keys. Each key can be
 associated with arbitrary data. It features fast lookup times at the cost of
