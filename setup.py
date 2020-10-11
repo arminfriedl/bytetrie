@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="bytetrie",
-    version="0.0.4",
+    version="0.0.5",
     url="https://git.friedl.net/incubator/bytetrie",
     license="MIT",
     author="Armin Friedl",

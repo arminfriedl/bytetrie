@@ -24,3 +24,18 @@ steps:
   when:
     event:
       - tag
+
+- name: promote
+  image: python:3
+  environment:
+    TWINE_USERNAME: __token__
+    TWINE_PASSWORD:
+      from_secret: pypi_token
+  commands:
+    - pip install twine setuptools wheel
+    - python setup.py sdist bdist_wheel
+    - twine check dist/*
+    - twine upload dist/*
+  when:
+    target:
+      - production
