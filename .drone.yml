@@ -37,5 +37,5 @@ steps:
     - twine check dist/*
     - twine upload dist/*
   when:
-    target:
-      - production
+    event:
+      - promote
