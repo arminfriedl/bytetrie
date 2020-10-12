@@ -1,18 +1,24 @@
 import setuptools
+import re
 
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+# prepend all relative links with
+# https://git.friedl.net/incubator/bytetrie/raw/branch/master/
+# to make them absolute
+long_description = re.sub("\[(.*)\]\((?!http)(.*)\)", r"[\1](https://git.friedl.net/incubator/bytetrie/raw/branch/master/\2)", long_description)
+
 setuptools.setup(
     name="bytetrie",
-    version="0.0.5",
+    version="0.0.7",
     url="https://git.friedl.net/incubator/bytetrie",
     license="MIT",
     author="Armin Friedl",
     author_email="dev@friedl.net",
 
-    description="A self-compressing radix trie with radix 256 in pure python",
+    description="A self-compressing, dependency-free radix trie",
     long_description=long_description,
     long_description_content_type="text/markdown",
 

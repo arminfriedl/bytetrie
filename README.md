@@ -75,12 +75,15 @@ t.insert(b"Helo", "Welsh")
 
 print("Where to say 'Hi' with 'He'?") 
 print(f"{[(n.key(), n.value()) for n in t.find(b'He')]}")
+# [(b'Hei', ['Romanian']), (b'Hej', ['Swedish', 'Polish']), (b'Helo', ['Welsh']), (b'Hello', ['English'])]
 
 print("Where to say 'Hi' with 'Ha'?") 
-print(f"{[(n.key().decode('utf-8'), n.value()) for n in t.find(b'Ha')]}")
+print(f"{[(n.key().decode(), n.value()) for n in t.find(b'Ha')]}")
+# [('Halló', ['Icelandic']), ('Hallo', ['German', 'Dutch'])]
 
 print("Where to say 'Hi' with 'Hē'?") 
-print(f"Say 'Hi' with utf-8: {[(n.key().decode('utf-8'), n.value()) for n in t.find('Hē'.encode('utf-8'))]}")
+print(f"Say 'Hi' with utf-8: {[(n.key().decode(), n.value()) for n in t.find('Hē'.encode())]}")
+# [('Hē', ['Hindi'])]
 ```
 
 # Contribute
