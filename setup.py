@@ -12,7 +12,7 @@ long_description = re.sub("\[(.*)\]\((?!http)(.*)\)", r"[\1](https://git.friedl.
 
 setuptools.setup(
     name="bytetrie",
-    version="0.0.7",
+    version="0.1.0",
     url="https://git.friedl.net/incubator/bytetrie",
     license="MIT",
     author="Armin Friedl",
