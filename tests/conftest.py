@@ -1,5 +1,6 @@
 import pytest
 
 pytest_plugins = [
-   "tries.simple_trie"
+    "tries.simple_trie",
+    "tries.degenerated_trie"
 ]

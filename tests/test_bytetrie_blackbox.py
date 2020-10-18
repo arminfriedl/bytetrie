@@ -2,11 +2,12 @@ import pytest
 
 import sys
 import os
-sys.path.append("tests/tries/")
 
 from bytetrie import ByteTrie
 
+sys.path.append("tests/tries/")
 import simple_trie
+import degenerated_trie
 
 def test_find_all(simple_trie):
     r = simple_trie.find(b"A")
@@ -47,3 +48,18 @@ def test_partial_prefix_find_terminal(simple_trie):
     assert len(r) == 1
     assert r[0].key() == b"ABCDE"
     assert r[0].value() == "ABCDE"
+
+def test_degenerated_find_first_finds_all(degenerated_trie):
+    r = degenerated_trie.find(b"A")
+    assert len(r) == 26
+    assert r[0].key() == b"A"
+    assert r[0].value() == "A"
+
+    assert r[25].key() == b"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    assert r[25].value() == "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+def test_degenerated_find_last_finds_one(degenerated_trie):
+    r = degenerated_trie.find(b"ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    assert len(r) == 1
+    assert r[0].key() == b"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    assert r[0].value() == "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

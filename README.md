@@ -3,7 +3,9 @@
 # Bytetrie
 A fast, dependency-free, self-compressing trie with radix 256 in pure python.
 
-![](trie.png)
+| ![Artistic ByteTrie Render](trie.png)                                                                                     |
+|--------------------------------------------------------------------------------------------------------------------------:|
+| *Rendering of a ByteTrie containing [~200,000 cities with a population > 500](http://download.geonames.org/export/dump/)*  |
 
 Bytetrie allows fast prefix search in a large corpus of keys. Each key can be
 associated with arbitrary data. It features fast lookup times at the cost of
